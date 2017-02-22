@@ -1,7 +1,10 @@
+
 body {
-	overflow-x: hidden;
 	background: #f0f0f0;
 	font-family: 'Roboto Slab', sans-serif;
+	
+	/* For removing horizontal scroll */
+	overflow-x: hidden;
 }
 
 
@@ -27,20 +30,237 @@ body.modal-open {
 }
 
 
+/* Angular loading bar styles */
+#loading-bar .bar {
+	background: rgba(0, 0, 0, 0.39);
+}
+
+#loading-bar-spinner .spinner-icon {
+	display: none;
+}
+
+
+/* Page and container message styles */
+.hidden {
+	display: none !important;
+	visibility: hidden !important;
+}
+
+.page-message {
+	position: absolute;
+	left: 52%;
+	top: 40%;
+	font-size: 24px;
+	font-family: 'Roboto', sans-serif;
+	color: rgba(51,51,51,0.4);
+}
+
+.page-message .page-message-icon {
+	display: block;
+	text-align: center;
+	font-size: 50px;
+}
+
+.page-message .page-message-text {
+	display: block;
+	text-align: center;
+}
+
+.container-message {
+	display: block;
+	margin: 0 auto;
+	margin-top: 20vh;
+	margin-left: -15%;
+	text-align: center;
+	font-size: 24px;
+	font-family: 'Roboto', sans-serif;
+	color: rgba(51,51,51,0.4);
+	border: 0px solid;
+}
+
+.container-message .container-message-icon {
+	display: block;
+	text-align: center;
+	font-size: 50px;
+}
+
+.container-message .container-message-text {
+	display: block;
+	text-align: center;
+}
+
+/* Page and container message responsive styles */
+@media screen and (max-width: 800px) {
+	.page-message {
+		position: static;
+		margin: 0 auto;
+		margin-top: 40%;
+	}
+}
+
+
 /* Tooltip customization */
 .tooltipster-sidetip.tooltipster-borderless.tooltipster-borderless-customized .tooltipster-box {
 }
 
 .tooltipster-sidetip.tooltipster-borderless.tooltipster-borderless-customized .tooltipster-content {
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
 	font-size: 12px;
 	padding: 5px 8px;
 }
 
 
+/* Ripple effects for elements 
+	(make the element position relative (to bring it above the ripple) 
+	and also its parent position relative (to be able to hide the ripple overflow) 
+	and set overflow to hidden in parent container) */
+
+/* Ripple (normal) */
+
+/* The element which will create the ripple effect. Its size and position will be set by JS. 
+	Initially scaled down to 0% and later animated to large fading circles (on click). */
+.ripple-effect {
+	display: block;
+	position: absolute;
+	background: rgba(11, 11, 11, .1);	/* ripple color */
+	border-radius: 100%;
+	-webkit-transform: scale(0);
+	-moz-transform: scale(0);
+	-o-transform: scale(0);
+	transform: scale(0);
+}
+
+/* Ripple animation effect */
+.ripple-effect.animate {
+	-webkit-animation: ripple-effect 0.65s linear;
+	-moz-animation: ripple-effect 0.65s linear;
+	-o-animation: ripple-effect 0.65s linear;
+	animation: ripple-effect 0.65s linear;
+}
+
+@-webkit-keyframes ripple-effect {
+
+	/* scale the element to 250% to safely cover the entire area and fade it out */
+	100% {
+		opacity: 0;
+		-webkit-transform: scale(2.5);
+		-moz-transform: scale(2.5);
+		-o-transform: scale(2.5);
+		transform: scale(2.5);
+	}
+}
+
+@-moz-keyframes ripple-effect {
+
+	/* scale the element to 250% to safely cover the entire area and fade it out */
+	100% {
+		opacity: 0;
+		-webkit-transform: scale(2.5);
+		-moz-transform: scale(2.5);
+		-o-transform: scale(2.5);
+		transform: scale(2.5);
+	}
+}
+
+@-o-keyframes ripple-effect {
+
+	/* scale the element to 250% to safely cover the entire area and fade it out */
+	100% {
+		opacity: 0;
+		-webkit-transform: scale(2.5);
+		-moz-transform: scale(2.5);
+		-o-transform: scale(2.5);
+		transform: scale(2.5);
+	}
+}
+
+@keyframes ripple-effect {
+
+	/* scale the element to 250% to safely cover the entire area and fade it out */
+	100% {
+		opacity: 0;
+		-webkit-transform: scale(2.5);
+		-moz-transform: scale(2.5);
+		-o-transform: scale(2.5);
+		transform: scale(2.5);
+	}
+}
+
+/* Ripple (light) */
+
+/* The element which will create the ripple effect. Its size and position will be set by JS. 
+	Initially scaled down to 0% and later animated to large fading circles (on click). */
+.ripple-effect-light {
+	display: block;
+	position: absolute;
+	background: rgba(255, 255, 255, .5);	/* ripple color */
+	border-radius: 100%;
+	-webkit-transform: scale(0);
+	-moz-transform: scale(0);
+	-o-transform: scale(0);
+	transform: scale(0);
+}
+
+/* Ripple animation effect */
+.ripple-effect-light.animate {
+	-webkit-animation: ripple-effect 0.65s linear;
+	-moz-animation: ripple-effect 0.65s linear;
+	-o-animation: ripple-effect 0.65s linear;
+	animation: ripple-effect 0.65s linear;
+}
+
+@-webkit-keyframes ripple-effect-light {
+
+	/* scale the element to 250% to safely cover the entire area and fade it out */
+	100% {
+		opacity: 0;
+		-webkit-transform: scale(2.5);
+		-moz-transform: scale(2.5);
+		-o-transform: scale(2.5);
+		transform: scale(2.5);
+	}
+}
+
+@-moz-keyframes ripple-effect-light {
+
+	/* scale the element to 250% to safely cover the entire area and fade it out */
+	100% {
+		opacity: 0;
+		-webkit-transform: scale(2.5);
+		-moz-transform: scale(2.5);
+		-o-transform: scale(2.5);
+		transform: scale(2.5);
+	}
+}
+
+@-o-keyframes ripple-effect-light {
+
+	/* scale the element to 250% to safely cover the entire area and fade it out */
+	100% {
+		opacity: 0;
+		-webkit-transform: scale(2.5);
+		-moz-transform: scale(2.5);
+		-o-transform: scale(2.5);
+		transform: scale(2.5);
+	}
+}
+
+@keyframes ripple-effect-light {
+
+	/* scale the element to 250% to safely cover the entire area and fade it out */
+	100% {
+		opacity: 0;
+		-webkit-transform: scale(2.5);
+		-moz-transform: scale(2.5);
+		-o-transform: scale(2.5);
+		transform: scale(2.5);
+	}
+}
+
+
 /* Swipe listener */
 .swipe-listener {
-	display: none;	/* not shown normally, only on small devices */
+	display: none;	/* not shown normally, only available on small devices */
 }
 
 
@@ -253,6 +473,10 @@ body.modal-open {
 	font-family: 'Roboto', sans-serif;
 	font-size: 0.9em;
 	line-height: 40px;
+
+	/* for ripple effect */
+	position: relative;
+	overflow: hidden;
 }
 
 .sidebar-nav li a {
@@ -260,10 +484,13 @@ body.modal-open {
 	text-decoration: none;
 	padding: 5px 10px 5px 20px;
 	color: #666;
+
+	/* for ripple effect */
+	position: relative;
 }
 
 .sidebar-nav li a:hover, .sidebar-nav li a:active {
-	background: rgba(0, 0, 0, 0.05);
+	background: rgba(0, 0, 0, 0.09);
 }
 
 .side-icon {
@@ -279,6 +506,46 @@ body.modal-open {
 	float: left;
 	vertical-align: middle;
 	margin: 8px 35px 0 2px;
+}
+
+.sidebar-nav .list-header {
+	display: block;
+	padding: 0 10px 0 20px;
+	margin-bottom: 10px;
+	font-family: 'Roboto', sans-serif;
+}
+
+.sidebar-nav .list-header .list-title {
+	display: inline;
+	font-size: 0.9em;
+	font-weight: 500;
+}
+
+.sidebar-nav .list-header .list-edit-btn {
+	position: absolute;
+	left: 200px;
+	right: auto;
+	border: 0;
+	outline: 0;
+	color: inherit;
+	text-decoration: none;
+	border-radius: 3px;
+	margin-top: -1px;
+	background: transparent;
+	font-family: 'Roboto', sans-serif;
+	font-size: 0.9em;
+	letter-spacing: 1px;
+	font-weight: 500;
+}
+
+.sidebar-nav .list-header .list-edit-btn span {
+	display: inline-block;
+	padding: 4px 12px 3px 12px;
+}
+
+.sidebar-nav .list-header .list-edit-btn:hover {
+	background: rgba(0, 0, 0, 0.1);
+	cursor: pointer;
 }
 
 
@@ -334,20 +601,17 @@ body.modal-open {
 		width: 7%;
 		z-index: 9;
 		background: transparent;
-		border: 1px solid;
 		-webkit-transition: left 0.5s ease;
 		-moz-transition: left 0.5s ease;
 		-o-transition: left 0.5s ease;
 		transition: left 0.5s ease;
-	}
-
-	.swipe-listener:hover {
-		background: blue;
+		background: transparent;
 	}
 
 	.swipe-listener.swipe-toggled {
 		left: 275px !important;
-		width: 10% !important;
+		width: 100% !important;
+	/*	background: rgba(0, 0, 0, .25) !important;	*/
 	}
 }
 
@@ -410,6 +674,25 @@ body.modal-open {
 @media screen and (max-width: 450px) {
 
 	.notes-container {
+		padding-left: 2.5%;
+	}
+
+	.note {
+		width: 45%;
+	}
+
+	.note .note-main {
+		padding: 0 .7em .5em .8em !important;
+	}
+
+	.note-opt a.opt-icon {
+		margin-left: 0 !important;
+	}
+}
+
+/*@media screen and (max-width: 450px) {
+
+	.notes-container {
 		padding-left: 5%;
 	}
 
@@ -417,7 +700,7 @@ body.modal-open {
 		width: 90%;
 	}
 }
-
+*/
 
 /* To maintain images in note tiles */
 .note img {
@@ -430,6 +713,10 @@ body.modal-open {
 /* Note tile main section (has note title and note content) */
 .note .note-main {
 	padding: 0.75em 1.5em 0.85em 1.5em;
+
+	/* to moderate the height of a note tile if it grows too large even after the prettifying filter */
+	max-height: 550px;
+	overflow-y: hidden;
 }
 
 .note-title {
@@ -443,6 +730,37 @@ body.modal-open {
 	font-size: 14px;
 	white-space: pre-wrap;
 	overflow-x: hidden;
+}
+
+/* Note tile labels section */
+.note .note-labels {
+	display: block;
+	margin-left: 12px;
+	margin-right: 12px;
+	margin-top: 3px;
+	margin-bottom: 3px;
+	font-family: Roboto, sans-serif;
+	font-size: 11px;
+	text-align: left;
+}
+
+.note-labels ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+.note-labels ul li {
+	display: inline-block;
+	margin: 0 2px 2px;
+	padding: 2px 5px;
+	background: rgba(0, 0, 0, 0.125);
+	border-radius: 2px;
+	cursor: pointer;
+}
+
+.note-labels ul li:hover {
+	background: rgba(0, 0, 0, 0.195);
 }
 
 /* Note tile options section */
@@ -528,11 +846,63 @@ body.modal-open {
 	opacity: 1;
 }
 
+.note-modal .modal-content {
+	border: 0;
+	border-radius: 5px;
+}
+
+.note-modal .modal-header, 
+.note-modal .modal-footer {
+	border: 0;
+}
+
+.note-modal .modal-header {
+	background: rgba(0, 0, 0, 0.1);
+	padding-left: 25px;
+}
+
 /* To maintain images in note modals */
 .note-modal img {
 	display: block;
 	max-width: 100%;
 	margin: 10px auto;
+}
+
+/* Note modal labels section */
+.note-modal-labels {
+	display: block;
+	margin-left: 7px;
+	margin-right: 7px;
+	margin-bottom: 3px;
+	font-family: Roboto, sans-serif;
+	font-size: 12px;
+	text-align: left;
+}
+
+.note-modal-labels ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+.note-modal-labels ul li {
+	display: inline-block;
+	margin: 0 2px 2px;
+	padding: 2px 5px;
+	background: rgba(0, 0, 0, 0.125);
+	border-radius: 2px;
+}
+
+/* Note modal date section */
+.note-modal-date {
+	display: inline-block;
+	float: left;
+	margin-top: 3px;
+	margin-left: 7px;
+	font-family: Roboto, sans-serif;
+	font-style: italic;
+	font-size: 12px;
+	color: #303030;
 }
 
 /* Note modal options section */
@@ -588,35 +958,12 @@ body.modal-open {
 }
 
 
-
-/**/
-
+/* Note edit modals */
 .note-edit-modal button.close {
 	margin-right: 10px;
 	margin-top: 5px;
 	margin-bottom: 3px;
 }
-
-.note-modal .modal-content {
-	border-radius: 2px;
-	border: 0;
-}
-
-.note-modal .modal-header, 
-.note-modal .modal-footer {
-	border: 0;
-}
-
-.note-modal .modal-header {
-	background: rgba(0, 0, 0, 0.1);
-	padding-left: 25px;
-}
-
-
-.note-view-modal .note-content {
-	min-height: 300px;
-}
-
 
 .edit-note-form .form-group {
 	margin-bottom: 0;
@@ -629,22 +976,22 @@ body.modal-open {
 	resize: none;
 	-webkit-box-shadow: none;
 	-moz-box-shadow: none;
+	-o-box-shadow: none;
 	box-shadow: none;
 	color: inherit;
 	background: transparent;
 }
 
 .edit-note-form .input-title {
-	min-height: 50px;
-	max-height: 150px;
 	margin-top: 13px;
 	padding: 7px 0 0px;
-	font-family: 'Roboto Condensed';
+	min-height: 50px;
+	max-height: 150px;
+	font-family: 'Roboto Condensed', sans-serif;
 	font-size: 22px;
 	font-weight: bold;
 	color: #252525;
 }
-
 
 .edit-note-form .input-content {
 	min-height: 200px;
@@ -654,8 +1001,7 @@ body.modal-open {
 
 .edit-note-form .input-content:hover, 
 .edit-note-form .input-content:focus {
-/*	box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.2), 0 11px 10px 0 rgba(0, 0, 0, 0.19);	*/
-	box-shadow: 0px 5px 15px -5px rgba(0,0,0,0.65);
+	box-shadow: 0px 5px 15px -5px rgba(0, 0, 0, 0.65);
 }
 
 .edit-note-form .input-content:focus {
@@ -663,83 +1009,38 @@ body.modal-open {
 	transition: .3s ease-out;
 }
 
-.edit-note-form input::-webkit-input-placeholder, .edit-note-form textarea::-webkit-input-placeholder {
-	font-weight: 300;
-	color: #444;
-}
-.edit-note-form input::-moz-placeholder, .edit-note-form textarea::-moz-placeholder {
-	font-weight: 300;
-	color: #444;
-}
-.edit-note-form input::input-placeholder, .edit-note-form textarea::input-placeholder {
+.edit-note-form input::-webkit-input-placeholder, 
+.edit-note-form textarea::-webkit-input-placeholder {
 	font-weight: 300;
 	color: #444;
 }
 
-
-
-.add-btn {
-	display: block;
-	height: 50px;
-	width: 50px;
-	background: #dd3131;
-	border: 0;
-	border-radius: 100px;
-	outline: 0;
-	color: #fff;
-	font-size: 32px;
-	position: fixed;
-    bottom: 4%;
-    right: 2%;
-	transition: 0.2s;
+.edit-note-form input::-moz-placeholder, 
+.edit-note-form textarea::-moz-placeholder {
+	font-weight: 300;
+	color: #444;
 }
 
-.add-btn:hover {
-	background: #000;
-	transition: 0.2s;
-}
-
-.add-note-modal .modal-content {
-	border-radius: 0;
-	padding: 20px;
-}
-
-.add-note-form .form-control {
-	border-radius: 0;
-	border: 0;
-	outline: 0;
-	-webkit-box-shadow: none;
-	-moz-box-shadow: none;
-	box-shadow: none;
-	border-bottom: 2px solid #eee;
-	background: transparent;
-}
-
-.add-note-form .form-control:hover, .add-note-form .form-control:focus {
-	border-bottom: 2px solid #ccc;
-}
-
-.add-note-form .btn {
-	border-radius: 0;
-	outline: 0;
-	background: #000;
-	color: #fff;
+.edit-note-form input::input-placeholder, 
+.edit-note-form textarea::input-placeholder {
+	font-weight: 300;
+	color: #444;
 }
 
 
+/* Note view modals */
+.note-view-modal .note-content {
+	min-height: 300px;
+	max-height: 450px;
+}
 
 
-
-
-
-
-
-
-.popup {
+/* Note colors popup */
+.colors-popup {
 	position: relative;
 }
 
-.popup ul {
+.colors-popup ul {
 	list-style-type: none;
 	position: absolute;
 	width: 120px;
@@ -762,22 +1063,22 @@ body.modal-open {
 	z-index: 99999;
 }
 
-.popup:hover ul {
+.colors-popup:hover ul {
 	visibility: visible;
 	opacity: 1;
 	transition: .6s;
 }
 
-.popup ul li {
-	margin: 5px 5px 0 0;
+.colors-popup ul li {
 	display: inline-block;
+	margin: 5px 5px 0 0;
 }
 
-.popup ul li:hover {
+.colors-popup ul li:hover {
 	cursor: pointer;
 }
 
-.btn-color {
+.color-btn {
 	height: 17px;
 	width: 17px;
 	margin: 2px;
@@ -791,59 +1092,109 @@ body.modal-open {
 }
 
 
+/* Note menu popup */
+.menu-popup {
+	position: relative;
+	opacity: 1 !important;
+}
 
-.popup2 { list-style-type:none; position:relative;
-opacity: 1 !important;}
-.popup2 ul{ position:absolute; top: 110%; left: -80px; margin:0px; padding:0px; 
-	visibility:hidden; opacity: 0; background: #fff; width: 120px;
+.menu-popup ul {
+	list-style-type: none;
+	position: absolute;
+	width: 120px;
+	top: 110%;
+	left: -80px;
+	margin:0px;
+	padding: 5px 0;
+	border-radius: 2px;
 	box-sizing: border-box;
--webkit-box-shadow: 0px 0px 10px 2px rgba(0,0,0,0.5);
--moz-box-shadow: 0px 0px 10px 2px rgba(0,0,0,0.5);
-box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.5);
-border-radius: 2px;
-text-align: left;
-    transition: .5s;
-
-
-  -webkit-transform: translateY(-1em);
-  -moz-transform: translateY(-1em);
-  transform: translateY(-1em);
-  transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;	
-  z-index: 99999;
-  display: block;
-}
-.popup2:hover ul {
-    display:block;
-    visibility: visible;
-    opacity: 1;
- z-index: 99999;
-      visibility: visible; /* shows sub-menu */
-  opacity: 1;
-  -webkit-transform: translateY(0%);
-  -moz-transform: translateY(0%);
-  transform: translateY(0%);
-  -webkit-transition-delay: .3s, 0s, 0.3s; /* this removes the transition delay so the menu will be visible while the other styles transition */
-  -moz-transition-delay: .3s, 0s, 0.3s; /* this removes the transition delay so the menu will be visible while the other styles transition */
-  transition-delay: .3s, 0s, 0.3s; /* this removes the transition delay so the menu will be visible while the other styles transition */
-  padding-top: 5px;
-  padding-bottom: 5px;
+	background: #fff;
+	text-align: left;
+	cursor: auto;
+	visibility: hidden;
+	opacity: 0;
+	transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
+	-webkit-transform: translateY(-1em);
+	-moz-transform: translateY(-1em);
+	-o-transform: translateY(-1em);
+	transform: translateY(-1em);
+	-webkit-box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.5);
+	-o-box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.5);
+	box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.5);
+	z-index: 99999;
 }
 
-.popup2 ul li{ list-style-type:none; margin: 0; padding: 5px 5px 5px 10px; display: block; width: 100%; font-family: 'Arial', sans-serif;}
-.popup2 ul li:hover{
-cursor: pointer;
-background: #f5f5f5;
-border-radius: 2px;
+.menu-popup:hover ul {
+	visibility: visible;
+	opacity: 1;
+	-webkit-transform: translateY(0%);
+	-moz-transform: translateY(0%);
+	-o-transform: translateY(0%);
+	transform: translateY(0%);
+	-webkit-transition-delay: .3s, 0s, 0.3s;	/* this removes the transition delay so the menu will be visible while the other styles transition */
+	-moz-transition-delay: .3s, 0s, 0.3s;	/* this removes the transition delay so the menu will be visible while the other styles transition */
+	-o-transition-delay: .3s, 0s, 0.3s;	/* this removes the transition delay so the menu will be visible while the other styles transition */
+	transition-delay: .3s, 0s, 0.3s;	/* this removes the transition delay so the menu will be visible while the other styles transition */
+}
+
+.menu-popup ul li {
+	display: block;
+	margin: 0;
+	padding: 5px 5px 5px 10px;
+	width: 100%;
+	font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+}
+
+.menu-popup ul li:hover {
+	cursor: pointer;
+	background: #f5f5f5;
 }
 
 
+/* Add a new note */
+.add-note-btn {
+	display: block;
+	height: 50px;
+	width: 50px;
+	position: fixed;
+	bottom: 4%;
+	right: 2%;
+}
 
+.add-note-btn .add-div {
+	display: block;
+	height: 50px;
+	width: 50px;
+	background: #d02f21;
+	border-radius: 100px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, .35);
 
+	/* for ripple effect */
+	position: relative;
+	overflow: hidden;
+}
 
+.add-div:hover {
+	background: #d23f31;
+}
 
+.add-note-btn button {
+	display: block;
+	height: 50px;
+	width: 50px;
+	border-radius: 100px;
+	border: 0;
+	outline: 0;
+	color: #fff;
+	font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+	font-size: 32px;
+	line-height: 155%;
+	background: transparent;
 
-
-
+	/* for ripple effect */
+	position: relative;	/* relatively positioned to bring it above the ripple (static positioned elements appear behind absolutely positioned siblings, i.e. the ripple element added via JS) */
+}
 
 
 /* Icons */
@@ -851,8 +1202,24 @@ border-radius: 2px;
 	background-image: url('icons/archive.svg');
 }
 
+.icon-unarchive {
+	background-image: url('icons/unarchive.svg');
+}
+
 .icon-trash {
 	background-image: url('icons/trash.svg');
+}
+
+.icon-tag {
+	background-image: url('icons/tag.svg');
+}
+
+.icon-delete {
+	background-image: url('icons/delete.svg');
+}
+
+.icon-restore {
+	background-image: url('icons/restore.svg');
 }
 
 .icon-palette {

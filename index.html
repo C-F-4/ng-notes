@@ -8,8 +8,16 @@
 	<script src="assets/jquery/3.1.1/jquery.min.js"></script>
 
 	<!-- AngularJS -->
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular.min.js"></script>
+<!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>-->
 <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.js"></script>-->
+
+	<!-- UI-Router -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js"></script>
+
+	<!-- Angular Loading Bar -->
+	<script src="https://chieffancypants.github.io/angular-loading-bar/src/loading-bar.js"></script>
+	<link rel="stylesheet" href="https://chieffancypants.github.io/angular-loading-bar/src/loading-bar.css">
 
 	<!-- Autosize -->
 	<script src="assets/autosize/autosize.js"></script>
@@ -28,7 +36,7 @@
 	<script src="assets/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 	<!-- Fonts -->
-	<link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab|Roboto+Condensed|Noto+Sans" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,500|Roboto+Slab:300,400|Roboto+Condensed|Noto+Sans" rel="stylesheet">
 
 	<!-- Font Awesome -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -98,9 +106,7 @@
 <body id="mynotes" ng-app="notesApp" ng-controller="notesController">
 
 	<!-- Swipe listener for small devices -->
-	<div class="swipe-listener">
-		l
-	</div>
+	<div class="swipe-listener"></div>
 	<!-- /.Swipe listener for small devices -->
 
 
@@ -128,46 +134,34 @@
 		<div class="sidebar-container">
 			<ul class="sidebar-nav">
 				<li>
-					<a href="#"><span class="side-icon icon-paperclip"></span> Notes</a>
+					<a ui-sref="state-notes" class="ripple" onclick="cfpLoadingBarElem.start();"><span class="side-icon icon-paperclip"></span> Notes</a>
 				</li>
 				<li>
-					<a href="#"><span class="side-icon icon-archive"></span> Archive</a>
+					<a ui-sref="state-archive" class="ripple" onclick="cfpLoadingBarElem.start();"><span class="side-icon icon-archive"></span> Archive</a>
 				</li>
 				<li>
-					<a href="#"><span class="side-icon icon-trash"></span> Trash</a>
+					<a ui-sref="state-trash" class="ripple" onclick="cfpLoadingBarElem.start();"><span class="side-icon icon-trash"></span> Trash</a>
+				</li>
+			</ul>
+
+			<ul class="sidebar-nav">
+				<!-- Labels -->
+				<div class="list-header">
+					<div class="list-title">Labels</div>
+					<a class="list-edit-btn"><span class="ripple">EDIT</span></a>
+				</div>
+
+				<li class="" ng-repeat="label in labels">
+					<a ui-sref="state-labels" class="ripple" ng-click="setSelectedLabels([label])"><span class="side-icon icon-tag"></span> <span ng-bind="label">Loading...</span></a>
 				</li>
 			</ul>
 
 			<ul class="sidebar-nav">
 				<li>
-					<a href="#">Events 2</a>
+					<a href="#" class="ripple">Settings</a>
 				</li>
 				<li>
-					<a href="#">Events 2</a>
-				</li>
-				<li>
-					<a href="#">Events 2</a>
-				</li>
-				<li>
-					<a href="#">Events 2</a>
-				</li>
-				<li>
-					<a href="#">Events 2</a>
-				</li>
-				<li>
-					<a href="#">Events 2</a>
-				</li>
-				<li>
-					<a href="#">Events 2</a>
-				</li>
-				<li>
-					<a href="#">Events 2</a>
-				</li>
-				<li>
-					<a href="#">Events 2</a>
-				</li>
-				<li>
-					<a href="#">About 2222</a>
+					<a href="#" class="ripple">About ng-notes</a>
 				</li>
 			</ul>
 		</div>
@@ -177,153 +171,27 @@
 	<!-- /.Header -->
 
 
-	<!-- Note tiles container -->
-	<div class="container notes-container" ng-cloak>
-
-		<!-- Note tile -->
-		<div class="masonry-item note" ng-class="note.colorClass" 
-		ng-repeat="note in (notes | ngRepeatFinish:this) | filter:{isArchived:false} | filter:{isTrashed:false} | searchFor:searchString">
-
-			<!-- Note-main (has note title and content, opens the corresponding note-view-modals) -->
-			<div class="note-main" data-toggle="modal" data-target="#note-view-modal-{{$index}}">
-				<h3 class="note-title">{{ note.title }}</h3>
-				<p class="note-content" froala-view="note.content"></p>
-			</div>
-
-			<!-- Note-opt (has note options) -->
-			<div class="note-opt">
-				<a title="Edit" class="opt-tooltip opt-icon icon-pencil" data-toggle="modal" data-target="#note-edit-modal-{{$index}}"></a>
-
-				<a title="Change color" class="opt-tooltip opt-icon icon-palette popup">
-					<ul>
-						<li class="btn-color" ng-class="colorClass" ng-repeat="colorClass in colorClasses" ng-click="setNoteColor(note, colorClass)"></li>
-					</ul>
-				</a>
-
-				<a title="Archive" class="opt-tooltip opt-icon icon-archive" ng-click="archiveNote(note)"></a>
-
-				<a class="opt-icon icon-dots popup2">
-					<ul>
-						<li ng-click="copyNote(note)">Make a copy</li>
-						<li ng-click="removeNote(note)">Delete note</li>
-					</ul>
-				</a>
-			</div>
-		</div>		
-		<!-- /.Note tile -->
-
-	</div>
-	<!-- /.Note tiles container -->
-
-
-	<!-- Note edit modals -->
-	<div class="modal fade-pop note-modal note-edit-modal" 
-	ng-repeat="note in notes | filter:{isArchived:false} | filter:{isTrashed:false} | searchFor:searchString" id="note-edit-modal-{{$index}}" role="dialog" edit-modals-loaded-directive>
-
-		<div class="modal-dialog">
-
-		<!-- Modal content -->
-		<div class="modal-content" ng-class="note.colorClass">
-
-			<!-- Edit Note Form -->
-			<form class="edit-note-form">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-
-				<!-- Modal header -->
-				<div class="modal-header">
-					<div class="form-group">
-						<label class="sr-only" for="title">Title: </label>
-						<textarea class="form-control input-title" rows="1" placeholder="Title" ng-model="note.title" maxlength="{{titleMaxLength}}"></textarea>
-					</div>
-				</div>
-
-				<!-- Modal body -->
-				<div class="modal-body">
-					<div class="form-group">
-						<label class="sr-only" for="content">Content: </label>
-						<textarea froala="froalaOptions" ng-model="note.content"></textarea>
-					</div>
-				</div>
-
-				<!-- Modal footer -->
-				<div class="modal-footer">
-					<div class="note-modal-opt">
-						<a title="Speech input" class="opt-tooltip opt-icon-lg icon-mic speech-input" ng-click="speechInput($index)"></a>
-
-						<a title="Change color" class="opt-tooltip opt-icon-lg icon-palette popup">
-							<ul>
-								<li ng-class="colorClass" class="btn-color" ng-repeat="colorClass in colorClasses" ng-click="setNoteColor(note, colorClass)"></li>
-							</ul>
-						</a>
-
-						<a title="Archive" class="opt-tooltip opt-icon-lg icon-archive" ng-click="archiveNoteViaModal(note, $index)" data-dismiss="modal"></a>
-
-						<a title="Delete" class="opt-tooltip opt-icon-lg icon-trash" ng-click="removeNoteViaModal(note, $index)" data-dismiss="modal"></a>
-
-						<a title="All done" class="opt-tooltip opt-icon-lg icon-check" data-dismiss="modal"></a>
-					</div>
-				</div>
-			</form> <!-- /.Edit Note Form -->
-
-		</div> <!-- /.Modal content -->
-
+	<!-- UI view (loads the content selected from the menu) -->
+		<div ui-view id="ui-view">
 		</div>
+	<!-- /.UI view -->
 
+	<!-- Loading message -->
+	<div class="page-message page-loading">
+		<span class="fa fa-paperclip page-message-icon"></span>
+		<p class="page-message-text">Loading your notes...</p>
 	</div>
-	<!-- /.Note edit modals -->
-
-
-	<!-- Note view modals -->
-	<div class="modal fade-pop note-modal note-view-modal" 
-	ng-repeat="note in notes | filter:{isArchived:false} | filter:{isTrashed:false} | searchFor:searchString" id="note-view-modal-{{$index}}" role="dialog" view-modals-loaded-directive>
-
-		<div class="modal-dialog">
-
-		<!-- Modal content -->
-		<div class="modal-content" ng-class="note.colorClass">
-
-			<!-- Modal header -->
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h3 class="note-title">{{note.title}}</h3>
-			</div>
-
-			<!-- Modal body -->
-			<div class="modal-body">
-				<p class="note-content" froala-view="note.content"></p>
-			</div>
-
-			<!-- Modal footer -->
-			<div class="modal-footer">
-				<div class="note-modal-opt">
-					<a title="Edit" class="opt-tooltip opt-icon-lg icon-pencil" data-toggle="modal" ng-click="openEditModalViaViewModal($index)"></a>
-
-					<a title="Change color" class="opt-tooltip opt-icon-lg icon-palette popup">
-						<ul>
-							<li ng-class="colorClass" class="btn-color" ng-repeat="colorClass in colorClasses" ng-click="setNoteColor(note, colorClass)"></li>
-						</ul>
-					</a>
-
-					<a title="Archive" class="opt-tooltip opt-icon-lg icon-archive" ng-click="archiveNoteViaModal(note, $index)" data-dismiss="modal"></a>
-
-					<a title="Delete" class="opt-tooltip opt-icon-lg icon-trash" ng-click="removeNoteViaModal(note, $index)" data-dismiss="modal"></a>
-
-					<a title="All done" class="opt-tooltip opt-icon-lg icon-check" data-dismiss="modal"></a>
-				</div>
-
-			</div>
-		
-		</div> <!-- /.Modal content -->
-
-		</div>
-
-	</div>
-	<!-- /.Note view modals -->
+	<!-- /.Loading message -->
 
 
 	<!-- Add New Note -->
 	<!-- Button for addNoteModal -->
-	<button title="Add new note" class="add-btn" data-toggle="modal" data-target="#addNoteModal">+</button>
+	<div class="add-note-btn">
+		<div title="Add a new note" class="opt-tooltip add-div"><button class="add-btn ripple-light" ng-click="createNote();">+</button></div>
+<!--
+		<div title="Add a new note" class="opt-tooltip add-div"><button class="add-btn ripple-light" data-toggle="modal" data-target="#addNoteModal">+</button></div>
+-->
+	</div>
 
 	<!-- addNoteModal -->
 	<div id="addNoteModal" class="modal fade add-note-modal" role="dialog">
